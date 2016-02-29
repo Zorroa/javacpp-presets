@@ -53,8 +53,8 @@
     <module>tesseract</module>
     <module>caffe</module>
     <module>cuda</module>
-    <module>mxnet</module>
     <module>tensorflow</module>
+    <module>oiio</module>
   </modules>
 
   <prerequisites>
