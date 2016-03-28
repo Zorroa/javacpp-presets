@@ -26,7 +26,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
             /*"OpenImageIO/export.h",*/ "OpenImageIO/imagecache.h", /*"OpenImageIO/pugiconfig.hpp",*/
             /*"OpenImageIO/texture.h",*/ "OpenImageIO/version.h", /*"OpenImageIO/filesystem.h",*/
             "OpenImageIO/imageio.h", /*"OpenImageIO/pugixml.cpp",*/ /*"OpenImageIO/thread.h"*/},
-            link={"OpenImageIO.1.6", "OpenImageIO_Util.1.6"}) })
+            link={"OpenImageIO.1.7", "OpenImageIO_Util.1.7"}) })
 public class oiio implements InfoMapper {
     public void map(InfoMap infoMap) {
         infoMap
@@ -43,6 +43,7 @@ public class oiio implements InfoMapper {
                 .put(new Info("const_iterator").skip())
                 .put(new Info("std::string::const_iterator").skip())
                 .put(new Info("std::string::const_reverse_iterator").skip())
+                .put(new Info("OpenImageIO::ustringHashIsLess").skip())
                 .put(new Info("OpenImageIO::ErrorHandler::verbosity").skip())
                 .put(new Info("OpenImageIO::string_view::const_iterator").skip())
                 .put(new Info("OpenImageIO::string_view::const_reverse_iterator").skip())
@@ -52,6 +53,8 @@ public class oiio implements InfoMapper {
                 .put(new Info("OpenImageIO::ImageInput::threads").skip())
                 .put(new Info("OpenImageIO::ImageOutput::threads").skip())
                 .put(new Info("OpenImageIO::ImageBuf::threads").skip())
+                .put(new Info("OpenImageIO::ImageBuf::get_pixel_channels").skip())
+                .put(new Info("OpenImageIO::ImageBuf::get_pixels").skip())
                 .put(new Info("OpenImageIO::ImageBuf::write").skip())               // FIXME: Too important to skip!
                 .put(new Info("std::vector<std::string>").pointerTypes("StringVector").define())
                 .put(new Info("Rep::iterator", "Rep::const_iterator").cast().pointerTypes("Pointer"))
@@ -86,7 +89,7 @@ public class oiio implements InfoMapper {
         public CreatorFunctionPointer(Pointer p) { super(p); }
         public CreatorFunctionPointer() { allocate(); }
         private native void allocate();
-        public native @Cast("OpenImageIO::v1_6::ImageInput *") Pointer call();
+        public native @Cast("OpenImageIO::v1_7::ImageInput *") Pointer call();
     }
 
     public static class ProgressCallbackFunctionPointer extends FunctionPointer {
